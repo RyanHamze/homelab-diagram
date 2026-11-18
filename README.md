@@ -63,11 +63,34 @@ The service icons are **not** in this repo, `fetch_icons.py` downloads them from
 2. Look at the render. Things that don't fit are layout: the top part (cloud, ISP router, firewall, switch, device row) and the column split inside the server card are coordinates in `build.py` (search for `fy, fh`, `ox, oy`, `bx, by`, `DY`, `MAD = …`).
 3. New icons: drop an SVG into `icons/` and use its file name in the inventory.
 
-## Using it with Claude Code
+## AI-assisted automatic mapping
 
-The repo contains a [`CLAUDE.md`](CLAUDE.md) with everything an AI agent needs to adapt it to your lab: how the code is structured, which parts of the layout are hardcoded, the questions to ask about your network, the render-and-check loop, and the design rules this diagram follows.
+**AI instructions are included so a terminal-enabled coding agent can pick up
+the repository and map the current Ubuntu/Docker environment automatically.**
+The runbook performs read-only local discovery, creates a sanitized evidence
+report, rewrites the inventory, adapts the hardcoded layout, renders the image,
+visually checks it, and iterates on layout problems.
 
-Clone the repo, open it with [Claude Code](https://claude.com/claude-code) and say something like *"help me make this diagram for my homelab"*. It will interview you about your network (or read your docs if you have some), rewrite `inventory.yaml`, adapt `build.py` and iterate on the render with you. Other agents can use the same file as context.
+Clone the repo, open it with an AI coding agent that can run terminal commands,
+edit files, and view images, then give it this one prompt:
+
+> Read AGENTS.md, AI_AUTOMAP.md, and CLAUDE.md completely. Map the current
+> environment and produce the final sanitized diagram. Follow the autonomous
+> discovery workflow, use read-only system inspection, do not change running
+> infrastructure, and continue through render and visual validation without
+> waiting for routine confirmation.
+
+See [`AI_AUTOMAP.md`](AI_AUTOMAP.md) for the discovery contract and outputs,
+[`AGENTS.md`](AGENTS.md) for agent routing, and [`CLAUDE.md`](CLAUDE.md) for the
+inventory schema, hardcoded layout areas, design rules, and interactive workflow.
+The instructions work with Claude Code and other capable coding agents; a plain
+chat interface without terminal, editing, and image inspection cannot complete
+the workflow.
+
+Automatic discovery is limited to what the current machine can verify. Accurate
+physical cabling, switch ports, upstream VLANs, and router rules still require
+explicitly approved read-only access to those devices. The agent records such
+gaps instead of inventing them.
 
 ## How it was made
 

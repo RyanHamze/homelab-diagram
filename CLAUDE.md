@@ -1,8 +1,17 @@
 # CLAUDE.md – adapting this diagram to someone else's homelab
 
-You are helping a user turn **their** homelab into a diagram like `docs/example.png`. The repo currently describes the original author's lab. Your job: find out what their lab looks like, rewrite `inventory.yaml`, adapt the layout in `build.py`, and iterate on the render with them until they are happy.
+You are helping a user turn **their** homelab into a diagram like `docs/example.png`. The repo currently describes the original author's lab. Your job: find out what their lab looks like, rewrite `inventory.yaml`, adapt the layout in `build.py`, and iterate on the render until it is accurate and readable.
 
-Start by telling the user briefly how this works (interview → inventory → layout → render/feedback rounds), then begin the interview. Don't ask everything at once.
+For a request to map or discover the current Ubuntu/Docker environment, read and
+follow `AI_AUTOMAP.md`. It authorizes the documented read-only local discovery
+and repository edits, so do not begin with the interview or wait for routine
+confirmation. Collect what the machine can establish, label inference honestly,
+render, inspect the PNG yourself, and ask only for material gaps such as remote
+device access or a scope-changing decision.
+
+For a manually documented or remote homelab, tell the user briefly how the
+interactive workflow works (documentation/interview → inventory → layout →
+render/feedback rounds), then begin the interview. Don't ask everything at once.
 
 ## How the repo works
 
@@ -33,7 +42,12 @@ Safety nets: `assert`s at the end of sections fail loudly when a column/panel ov
 
 ## The interview
 
-Ask in rounds of 3–6 questions, grouped by topic, and offer defaults. If the user has documentation (wiki, notes, a docs repo) or you have shell access to their systems, offer to read that first and only ask for the gaps. **Only run read-only commands, and ask before touching any system.**
+Use this interview only when autonomous local discovery does not apply or after
+it has left material gaps. Ask in rounds of 3–6 questions, grouped by topic, and
+offer defaults. If the user has documentation (wiki, notes, a docs repo), offer
+to read that first and only ask for the gaps. For local discovery, the safety and
+authorization rules in `AI_AUTOMAP.md` take precedence. For every other system,
+only run read-only commands and ask before accessing it.
 
 1. **Purpose & privacy:** public post (e.g. Reddit) or private? Real domain to hide? Real SSID names to hide? Username watermark? Title and date?
 2. **Internet edge:** ISP connection type and speed (down/up), modem/router model, its ports and which one the firewall uses, bridge mode or double NAT/exposed host, DNS provider, offsite backup target.
